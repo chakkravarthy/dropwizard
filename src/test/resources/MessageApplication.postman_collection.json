@@ -1,0 +1,124 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MessageApplication",
+		"_postman_id": "601e7a5a-1282-f33c-fe25-e065a4092947",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DBModelSetup",
+			"request": {
+				"url": "localhost:8080/demo/dbsetup",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateMessage",
+			"request": {
+				"url": "localhost:8080/demo/message",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\":\"This message is the first one\", \"userId\":1}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetMessageIDByBodyAndUserId",
+			"request": {
+				"url": "localhost:8080/demo/message/id",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"message\":\"This message is the first one\",\n\"userId\":1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateMessageByID",
+			"request": {
+				"url": "localhost:8080/demo/message/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\":\"Updated my first message\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MessageFeedForUser",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/demo/feed?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
