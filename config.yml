@@ -1,0 +1,71 @@
+# Database settings.
+database:
+
+  # the name of your JDBC driver
+  driverClass: org.h2.Driver
+
+  # the username
+  user: sa
+
+  # the password
+  password:
+
+  # the JDBC URL
+  url: jdbc:h2:~/test;AUTO_SERVER=true
+  
+  maxWaitForConnection: 1s
+  
+  validationQuery: "SELECT 1"
+  
+  validationQueryTimeout: 3s
+  
+  minSize: 8
+  
+  maxSize: 32
+  
+  checkConnectionWhileIdle: false
+  
+  evictionInterval: 10s
+  
+  minIdleTime: 1 minute
+  
+  checkConnectionOnBorrow: true
+
+logging:
+  level: INFO
+  
+  # Logger-specific levels.
+  loggers:
+
+    # Overrides the level of com.demo.db and sets it to DEBUG.
+    "com.demo.db": DEBUG
+
+    # Enables the SQL query log and redirect it to a separate file
+    "org.skife.jdbi":
+      level: DEBUG
+      # This line stops org.skife.jdbi (or anything under it) from using the root logger
+      additive: false
+      appenders:
+        - type: file
+          currentLogFilename: ./logs/application-sql.log
+          archivedLogFilenamePattern: ./logs/application-sql-%d.log.gz
+          archivedFileCount: 5
+    
+  appenders:
+    - type: file
+      # The file to which current statements will be logged.
+      currentLogFilename: ./logs/application.log
+
+      # When the log file rotates, the archived log will be renamed to this and gzipped. The
+      # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
+      # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
+      archivedLogFilenamePattern: ./logs/application-%d.log.gz
+
+      # The number of archived files to keep.
+      archivedFileCount: 5
+
+      # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
+      timeZone: UTC  
+    
+server:
+  applicationContextPath: /demo
