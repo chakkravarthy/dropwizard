@@ -22,7 +22,7 @@ public class MessageApplication extends Application<MessageAppConfiguration> {
 
 	@Override
 	public String getName() {
-		return "TweetService";
+		return "Message Application";
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class MessageApplication extends Application<MessageAppConfiguration> {
 	public void run(final MessageAppConfiguration configuration, final Environment environment) {
 		final DBIFactory factory = new DBIFactory();
 		
-		final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
+		final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "database");
 		
 		final MessageDAO tweetDAO = jdbi.onDemand(MessageDAO.class);
 		final DBBuilderDAO dbBuilderDAO = jdbi.onDemand(DBBuilderDAO.class);
