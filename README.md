@@ -11,3 +11,7 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+This is a RESTFul Webservice using DropWizard for creating messages and broadcasting messages to people who follow the message creator. 
+Show users who authenticate using a Directory service a feed of top 100 messages.
+
