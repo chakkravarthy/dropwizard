@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,7 +26,7 @@ import com.demo.db.MessageDAO;
 public class MessageService {
 
 	private final MessageDAO messageDAO;
-	
+
 	public MessageService(MessageDAO messageDAO) {
 		this.messageDAO = messageDAO;
 	}
@@ -34,64 +35,47 @@ public class MessageService {
 	@Path("/message")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Integer createTweet(@Valid Message tweet) {
+	public Integer createMessage(@Valid Message message) {
 
-		return messageDAO.insertTweet(tweet.getMessage(), System.currentTimeMillis(), tweet.getUserId());
-
+		return messageDAO.insertMessage(message.getMessage(), message.getCreationTime(), message.getUserId());
 	}
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/message/id")
-	public String getTweetId(@Valid Message tweet) {
+	public Integer getMessageId(@Valid Message message) {
 
-		return messageDAO.getTweet(tweet.getMessage(), tweet.getUserId());
-
+		return messageDAO.getMessageId(message.getMessage(), message.getUserId());
 	}
 
-	@PUT
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/message/{id}")
-	public boolean updateTweet(@PathParam("id") Integer id, @Valid Message tweet) {
+	@Path("/feed/{count}")
+	public List<Message> getTopNMessages(@PathParam("count") Integer count,
+			@Valid @NotNull @QueryParam("userId") Integer userId) {
 
-		messageDAO.updateTweet(id, tweet.getMessage(), System.currentTimeMillis());
-
-		return true;
-
+		return messageDAO.getTopNMessages(count, userId);
 	}
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/follow")
-	public boolean followUsers(@Valid UsersFollowers usersFollowers) {
+	public void followUsers(@Valid UsersFollowers usersFollowers) {
 
 		List<UserFollowerRel> followers = usersFollowers.getFollowerIds().stream()
 				.map(followerId -> new UserFollowerRel(usersFollowers.getUserId(), followerId))
 				.collect(Collectors.toList());
 
 		messageDAO.followUsers(followers);
-
-		return true;
-
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/feed")
-	public List<Message> getTopHundredTweets(@QueryParam("userId") String userId) {
-
-		return messageDAO.getTweets(userId);
-
 	}
 
 	@GET
 	@Path("/pingme")
 	public String pingMe() {
-		return "I am here";
+		return "Service is running";
 	}
 
 }

@@ -2,22 +2,21 @@ package com.demo.api;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Message implements Serializable {
 
 	private static final long serialVersionUID = 7265588003050499550L;
 
 	private Integer id;
+	@NotEmpty
 	private String message;
+	@NotNull
 	private Long creationTime;
+	@NotNull
 	private Integer userId;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getMessage() {
 		return message;
@@ -41,6 +40,14 @@ public class Message implements Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

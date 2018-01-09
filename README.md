@@ -1,4 +1,3 @@
-
 This is a RESTFul Webservice using DropWizard for creating messages and broadcasting messages to people who follow the message creator. 
 Users will see a preview of top 100 messages from their followers.
 

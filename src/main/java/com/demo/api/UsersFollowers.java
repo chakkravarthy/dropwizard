@@ -2,9 +2,15 @@ package com.demo.api;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UsersFollowers {
 
+	@NotNull
 	private Integer userId;
+	@NotEmpty
 	private List<Integer> followerIds;
 
 	public Integer getUserId() {

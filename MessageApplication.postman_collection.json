@@ -1,0 +1,135 @@
+{
+	"info": {
+		"name": "MessageApplication",
+		"_postman_id": "c579dd80-16b4-1cb1-cdd6-39a4f23521e1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DBModelSetup",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/demo/dbsetup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"dbsetup"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "CreateMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\":\"\", \"userId\":1, \"creationTime\": 545454}"
+				},
+				"url": {
+					"raw": "localhost:8080/demo/message",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"message"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetMessageIDByBodyAndUserId",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"message\":\"This message is the first one-user2\",\n\"userId\":2,\n\"creationTime\":46465656\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/demo/message/id",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"message",
+						"id"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "MessageFeedForUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/demo/feed/1?userId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"feed",
+						"1"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1",
+							"equals": true
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}
